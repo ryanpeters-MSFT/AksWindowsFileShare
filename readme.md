@@ -39,13 +39,17 @@ Run the following script to create the necessary supporting resources:
 .\ias\setup.ps1
 ```
 
-As part of the execution of this script, it will prompt for the password of the VM. Once this is complete, verify that there are no errors and the cluster is accessible. In addition, ensure that the SMB CSI driver pods were deployed via Helm:
+As part of the execution of this script, it will prompt for the password of the VM. Once this is complete, verify that there are no errors and the cluster is accessible. 
+
+In addition, ensure that the SMB CSI driver pods were deployed via Helm:
 
 ```powershell
 kubectl -n kube-system get pods --selector="app.kubernetes.io/name=csi-driver-smb" --watch
 ```
 
-### Deploy the Kubernetes Resources
+Finally, log onto the VM using the public IP provided in the output, set up a file share, and provide access credentials. 
+
+### Deploy Kubernetes Resources
 
 Once the cluster has been provisioned, the following script will deploy the necessary namespace, deployment, service, PVC/PV, and SMB secret to access the share. 
 
