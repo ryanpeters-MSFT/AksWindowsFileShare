@@ -32,7 +32,7 @@ spec:
     readOnly: false
     volumeHandle: smb-pv
     volumeAttributes:
-      source: \\10.0.2.4\Data # replace with private IP from VNET
+      source: \\10.0.2.4\Configuration # replace with private IP from VNET and share name
     nodeStageSecretRef:
       name: smb-secret
       namespace: apps
