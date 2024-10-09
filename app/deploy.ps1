@@ -1,4 +1,9 @@
-# build the app with docker
-az acr login -n binarydad
-docker build -f .\Dockerfile . -t binarydad.azurecr.io/apiservice:latest
-docker push binarydad.azurecr.io/apiservice:latest
+$ACR = "binarydad"
+$TAG = "$($ACR).azurecr.io/apiservice:latest"
+
+# log into ACR
+az acr login -n $ACR
+
+# build and push image to registry
+docker build -f .\Dockerfile . -t $TAG
+docker push $TAG

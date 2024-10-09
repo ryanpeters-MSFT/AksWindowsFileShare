@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile-csi
+  storageClassName: ""
   resources:
     requests:
       storage: 5Gi
@@ -22,11 +22,17 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
+  storageClassName: ""
+  # mountOptions:
+  #     - dir_mode=0777
+  #     - file_mode=0777
+  #     - vers=3.0
   csi:
     driver: smb.csi.k8s.io
+    readOnly: false
     volumeHandle: smb-pv
     volumeAttributes:
-      source: "//52.254.65.189/Data"
-      csi.storage.k8s.io/node-stage-secret-name: "smb-secret"
-      csi.storage.k8s.io/node-stage-secret-namespace: "default"
+      source: \\10.0.2.4\Data # replace with private IP from VNET
+    nodeStageSecretRef:
+      name: smb-secret
+      namespace: apps
