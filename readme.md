@@ -2,6 +2,8 @@
 
 This example shows how to bind a Windows SMB share to pods running in AKS. The PV uses the `smb.csi.k8s.io` driver to access the SMB share. 
 
+*NOTE: This demo is a POC and is not production ready. It does not follow best practices for securing secrets used to access the file share. Consider using Azure Key Vault with Workload Identity (and K8s SecretProviderClass and RBAC configuration) to securely store credentials.*
+
 ## Running the Demo
 
 The demo includes a simple .NET Web API application that retrieves a value from the file `./configuration/data.json` and outputs the property for "connection". The file should look like the following:
