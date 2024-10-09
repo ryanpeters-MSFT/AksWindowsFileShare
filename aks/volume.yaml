@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: configuration-pvc
+  namespace: apps
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: configuration-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: configuration-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: smb-pv
+    volumeAttributes:
+      source: "//52.254.65.189/Data"
+      csi.storage.k8s.io/node-stage-secret-name: "smb-secret"
+      csi.storage.k8s.io/node-stage-secret-namespace: "default"
