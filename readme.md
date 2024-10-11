@@ -41,7 +41,7 @@ Run the following script to create the necessary supporting resources:
 .\ias\setup.ps1
 ```
 
-As part of the execution of this script, it will prompt for the password of the VM. Once this is complete, verify that there are no errors and the cluster is accessible. 
+As part of the execution of this script, it will prompt for the password of the VM. Once this is complete, verify that there are no errors and the cluster is accessible by invoking any `kubectl` command.
 
 In addition, ensure that the SMB CSI driver pods were deployed via Helm:
 
@@ -57,14 +57,14 @@ Once the cluster has been provisioned, the following script will deploy the nece
 
 **Be sure to update the following:**
 - Set the username and password (base64 encoded) in [`smb-secret.yaml`](./aks/smb-secret.yaml).
-- The internal IP of the VM that contains the SMB share and the name of the share in [volume.yaml](./aks/volume.yaml)
+- The internal IP of the VM that contains the SMB share and the name of the share in [`volume.yaml`](./aks/volume.yaml)
 
 ```powershell
 # deploy the kubernetes resources
 .\aks\deploy.ps1
 ```
 
-*The output of the execution should show the public IP of the `LoadBalancer` service used by the web API application.*
+*The output of the execution should show the public IP of the `LoadBalancer` service used by the web API application. This may take a few minutes to provision.*
 
 ## Links
 - [Provision Azure NetApp Files SMB volumes for Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/azure-netapp-files-smb)
