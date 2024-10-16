@@ -10,10 +10,13 @@ var configuration = app.Services.GetRequiredService<IConfiguration>();
 
 app.MapGet("/", () =>
 {
+    // the directory containing the configuration files (mounted externally)
     var configurationPath = configuration["ConfigurationPath"];
 
+    // retrieve a specific configuration file from the directory
     var dataPath = Path.Combine(configurationPath, "data.json");
 
+    // parse and output the "connection" value
     var jsonContent = File.ReadAllText(dataPath);
     var jsonDocument = JsonDocument.Parse(jsonContent);
 
